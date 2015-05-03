@@ -123,6 +123,12 @@ func (c StorageClient) GetBlobService() *BlobStorageClient {
 	return &BlobStorageClient{c}
 }
 
+//GetQueueService retuns a QUeueStorageClient which can operate on the
+// queue service of the storage account.
+func (c StorageClient) GetQueueService() *QueueStorageClient {
+	return &QueueStorageClient{c}
+}
+
 func (c StorageClient) createAuthorizationHeader(canonicalizedString string) string {
 	signature := c.computeHmac256(canonicalizedString)
 	return fmt.Sprintf("%s %s:%s", "SharedKey", c.accountName, signature)
